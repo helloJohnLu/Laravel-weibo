@@ -30,7 +30,15 @@ class SessionsController extends Controller
         }else{
             // 登录失败
             session()->flash('danger','很抱歉，您的邮箱和密码不匹配');
-            return redirect()->back();
+            return redirect()->back()->withInput();
         }
+    }
+
+    // 退出登录
+    public function destroy()
+    {
+        Auth::logout();
+        session()->flash('success','您已退出登录');
+        return redirect('login');
     }
 }

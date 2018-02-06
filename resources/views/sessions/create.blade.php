@@ -20,7 +20,7 @@
 
                     <div class="form-group">
                         <label for="password">密码：</label>
-                        <input type="password" name="password" class="form-control" value="{{ old('password') }}">
+                        <input type="password" name="password" class="form-control" value="">
                     </div>
 
                     <button type="submit" class="btn btn-primary">登录</button>
