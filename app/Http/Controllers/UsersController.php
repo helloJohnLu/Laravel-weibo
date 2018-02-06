@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
@@ -24,6 +25,10 @@ class UsersController extends Controller
      */
     public function create()
     {
+        if (Auth::check()){
+            return redirect('/');
+        }
+
         return view('users.create');
     }
 
@@ -49,10 +54,12 @@ class UsersController extends Controller
             'password' => bcrypt($request->password),
         ]);
 
+        Auth::login($user);    // 自动登录
+
+
         // 闪存（保留到下个 HTTP 请求到来之前）注册成功提示信息
         session()->flash('success','欢迎，您将在这里开启一段新的旅程~');
 
-        Auth::login($user);
         // 跳转
         return redirect()->route('users.show',[$user]);
         // 以上代码等同于：redirect()->route('users.show', [$user->id]);
