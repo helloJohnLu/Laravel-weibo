@@ -9,12 +9,17 @@ use Illuminate\Support\Facades\Auth;
 
 class SessionsController extends Controller
 {
+    public function __construct()
+    {
+        // 只让未登录用户访问登录页面
+        $this->middleware('guest',[
+            'only' => ['create']
+        ]);
+    }
+
     // 渲染登录视图
     public function create()
     {
-        if (Auth::check()){
-            return redirect('/');
-        }
         return view('sessions.create');
     }
 

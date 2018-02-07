@@ -11,8 +11,14 @@ class UsersController extends Controller
     // 初始化构造函数
     public function __construct()
     {
+        // 权限认证，过滤未登录用户的访问请求
         $this->middleware('auth',[
             'except' => ['show','create','store']
+        ]);
+
+        // 只让未登录用户访问注册页面
+        $this->middleware('guest',[
+            'only' => ['create']
         ]);
     }
 
@@ -33,10 +39,6 @@ class UsersController extends Controller
      */
     public function create()
     {
-        if (Auth::check()){
-            return redirect('/');
-        }
-
         return view('users.create');
     }
 
