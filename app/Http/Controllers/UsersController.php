@@ -13,7 +13,7 @@ class UsersController extends Controller
     {
         // 权限认证，过滤未登录用户的访问请求
         $this->middleware('auth',[
-            'except' => ['show','create','store']
+            'except' => ['show','create','store','index']
         ]);
 
         // 只让未登录用户访问注册页面
@@ -29,7 +29,8 @@ class UsersController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::all();
+        return view('users.index',compact('users'));
     }
 
     /**
