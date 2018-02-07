@@ -82,9 +82,9 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit(User $user)
     {
-
+        return view('users.edit',compact('user'));
     }
 
     /**
@@ -94,9 +94,28 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(User $user, Request $request)
     {
-        //
+        // 校验数据合法性
+        $this->validate($request,[
+            'name' => 'required|max:50|min:3',
+            'password' => 'nullable|confirmed|min:6'
+        ]);
+
+        // 更新数据库
+        $data = [];
+        $data['name'] = $request->name;
+
+        if ($request->password) {
+            $data['password'] = bcrypt($request->password);
+        }
+        $user->update($data);
+
+        // 更新成功提示信息
+        session()->flash('success','个人资料更新成功！');
+
+        return redirect()->route('users.update', $user->id);
+
     }
 
     /**
