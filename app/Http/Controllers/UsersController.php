@@ -92,6 +92,7 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
+        $this->authorize('update',$user);    // 权限认证
         return view('users.edit',compact('user'));
     }
 
@@ -109,6 +110,8 @@ class UsersController extends Controller
             'name' => 'required|max:50|min:3',
             'password' => 'nullable|confirmed|min:6'
         ]);
+
+        $this->authorize('update',$user);    // 权限认证
 
         // 更新数据库
         $data = [];
