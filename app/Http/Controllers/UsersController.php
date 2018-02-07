@@ -56,7 +56,6 @@ class UsersController extends Controller
 
         Auth::login($user);    // 自动登录
 
-
         // 闪存（保留到下个 HTTP 请求到来之前）注册成功提示信息
         session()->flash('success','欢迎，您将在这里开启一段新的旅程~');
 
