@@ -18,6 +18,19 @@ class User extends Authenticatable
         'name', 'email', 'password',
     ];
 
+
+    // 用户注册激活令牌，监听事件
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($user) {
+            $user->activation_token = str_random(30);
+        });
+    }
+
+
+
     /**
      * The attributes that should be hidden for arrays.
      *
