@@ -24,7 +24,7 @@
                     </div>
 
                     <div class="checkbox">
-                        <label><input type="checkbox" name="remember"> 记住我</label>
+                        <label><input type="checkbox" name="remember"> 记住我 </label>
                     </div>
 
                     <button type="submit" class="btn btn-primary">登录</button>
@@ -32,7 +32,7 @@
 
                 <hr>
 
-                <p>还没账号？<a href="{{ route('signup') }}">现在注册！</a></p>
+                <p>还没账号？<a href="{{ route('signup') }}">现在注册！</a> | <span style="padding-left: 5px;"><a href="{{ route('password.request') }}">忘记密码？</a></span></p>
             </div>
         </div>
     </div>
