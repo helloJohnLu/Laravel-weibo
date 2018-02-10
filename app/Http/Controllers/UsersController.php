@@ -84,8 +84,14 @@ class UsersController extends Controller
      */
     public function show(User $user)
     {
-        $user->gravatar();
-        return view('users.show',compact('user'));
+        $user->gravatar();      // gravatar 用户头像
+
+        // 获取微博数据
+        $statuses = $user->statuses()
+                    ->orderBy('created_at','desc')
+                    ->paginate(30);
+
+        return view('users.show',compact('user', 'statuses'));
     }
 
     /**
